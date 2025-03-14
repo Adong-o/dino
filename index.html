@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Chrome Dino Runner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #f7f7f7;
+        }
+        
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+        }
+        
+        #score-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #535353;
+            font-size: 20px;
+            z-index: 1;
+            text-align: right;
+            line-height: 1.5;
+        }
+        
+        #high-score {
+            color: #757575;
+            font-size: 16px;
+        }
+
+        #distance-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #535353;
+            font-size: 20px;
+            z-index: 1;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        #high-distance {
+            color: #757575;
+            font-size: 16px;
+        }
+        
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #535353;
+            font-size: 24px;
+            text-align: center;
+            display: none;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        #restart-button {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin-top: 25px;
+            cursor: pointer;
+            background: #535353;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-family: 'Press Start 2P', cursive;
+            transition: all 0.3s ease;
+        }
+        
+        #restart-button:hover {
+            background: #666666;
+            transform: scale(1.05);
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #535353;
+            font-size: 14px;
+            text-align: center;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .loading-text {
+            font-size: 24px;
+            color: #535353;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-text">Loading...</div>
+    </div>
+    
+    <div id="game-container">
+        <div id="score-container">
+            <div id="high-score">HI <span id="high-score-value">0</span></div>
+            <div id="current-score">Score: <span id="score-value">0</span></div>
+        </div>
+
+        <div id="distance-container">
+            <div id="high-distance">Best Distance: <span id="high-distance-value">0</span></div>
+            <div id="current-distance">Distance: <span id="distance-value">0</span></div>
+        </div>
+        
+        <div id="game-over">
+            GAME OVER<br>
+            Score: <span id="final-score">0</span><br>
+            Distance: <span id="final-distance">0</span><br>
+            <button id="restart-button">RESTART</button>
+        </div>
+        
+        <div id="instructions">
+            SPACE / ↑ to Jump | ↓ to Duck | Double Jump Available
+        </div>
+    </div>
+
+    <!-- Three.js and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+    
+    <!-- Game script -->
+    <script src="game.js"></script>
+</body>
+</html> 
